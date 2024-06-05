@@ -3,6 +3,16 @@ from .models import Category, Product
 
 
 def product_list(request, category_identifier=None):
+    """
+    List of products view.
+
+    Args:
+        request (HttpRequest): The request object.
+        category_identifier (str): The category identifier.
+    Returns:
+        HttpResponse: The HTTP response.
+    """
+
     category = None
     categories = Category.objects.all()
     products = Product.objects.filter(available=True)
@@ -17,5 +27,16 @@ def product_list(request, category_identifier=None):
 
 
 def product_detail(request, id, identifier):
+    """
+    Product detail view.
+
+    Args:
+        request (HttpRequest): The request object.
+        id (str): The product ID.
+        identifier (str): The product identifier.
+    Returns:
+        HttpResponse: The HTTP response.
+    """
+
     product = get_object_or_404(Product, id=id, identifier=identifier, available=True)
     return render(request, "market/product/detail.html", {"product": product})
