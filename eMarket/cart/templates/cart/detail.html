@@ -1,4 +1,4 @@
-{% extends "shop/base.html" %}
+{% extends "market/layout.html" %}
 {% load static %}
 
 {% block title %}
@@ -7,6 +7,9 @@ Your shopping cart
 
 {% block content %}
 <h1>Your shopping cart</h1>
+
+{% if cart %}
+
 <table class="cart">
 	<thead>
 		<tr>
@@ -31,7 +34,7 @@ Your shopping cart
 			<td>
 				<form action="{% url 'cart:cart_add' product.id %}" method="post">
 					{{ item.update_quantity_form.quantity }}
-					{{ item.update_quantity_form.override }}
+					{{ item.update_quantity_form.update_quantity }}
 					<input type="submit" value="Update">
 					{% csrf_token %}
 				</form>
@@ -42,21 +45,24 @@ Your shopping cart
 					{% csrf_token %}
 				</form>
 			</td>
-			<td class="num">${{ item.price }}</td>
-			<td class="num">${{ item.total_price }}</td>
+			<td class="num">Ksh{{ item.price }}</td>
+			<td class="num">Ksh{{ item.total_price }}</td>
 		</tr>
 		{% endwith %}
 		{% endfor %}
 		<tr class="total">
 			<td>Total</td>
 			<td colspan="4"></td>
-			<td class="num">${{ cart.get_total_price }}</td>
+			<td class="num">Ksh{{ cart.get_total_price }}</td>
 		</tr>
 	</tbody>
 </table>
-<p class="text-right">
-	<a href="{% url 'market:product_list' %}" class="button
-    light">Continue shopping</a>
-	<a href="{% url 'orders:order_create' %}" class="button">Checkout</a>
+
+<p class="text-right"><a href="#" class="button">Checkout</a></p>
+
+{% endif %}
+
+<p>
+	<a href="{% url 'market:product_list' %}" class="button">Continue shopping</a>
 </p>
 {% endblock %}

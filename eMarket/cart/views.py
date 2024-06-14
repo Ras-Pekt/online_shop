@@ -22,9 +22,15 @@ def cart_add(request, product_id):
 
     if form.is_valid():
         cleaned_data = form.cleaned_data
-        cart.add(product=product, quantity=cleaned_data["quantity"])
+        cart.add(
+            product=product,
+            quantity=cleaned_data["quantity"],
+            update_quantity=cleaned_data["update_quantity"],
+        )
 
-    return redirect("cart:cart_detail")
+    # TODO: Add add a seperate view for the view_cart_details.
+
+    return redirect("market:product_list")
 
 
 @require_POST
@@ -55,14 +61,17 @@ def cart_detail(request):
         HttpResponse: The response object.
     """
 
-    # cart = Cart(request)
-    # return render(request, 'cart/detail.html', {'cart': cart})
-
     cart = Cart(request)
+    # return render(request, "cart/detail.html", {"cart": cart})
+
+    # for item in cart:
+    #     item["update_quantity_form"] = CartAddProductForm(
+    #         initial={"quantity": item["quantity"]}
+    #     )
 
     for item in cart:
         item["update_quantity_form"] = CartAddProductForm(
-            initial={"quantity": item["quantity"]}
+            initial={"quantity": item["quantity"], "update_quantity": True}
         )
 
     return render(request, "cart/detail.html", {"cart": cart})
