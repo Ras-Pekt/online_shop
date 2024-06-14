@@ -55,3 +55,37 @@ class Order(models.Model):
         The total cost is calculated by summing the cost of all the products in the order.
         """
         return sum(item.get_cost() for item in self.items.all())
+
+
+class OrderItem(models.Model):
+    """
+    OrderItem model to store information about the products in an order.
+
+    The OrderItem model has the following fields:
+    - order: a foreign key to the Order model to associate the order item with an order
+    - product: a foreign key to the Product model to associate the order item with a product
+    - price: the price of the product at the time of the order
+    - quantity: the quantity of the product in the order
+    """
+
+    order = models.ForeignKey(Order, related_name="items", on_delete=models.CASCADE)
+    product = models.ForeignKey(
+        Product, related_name="order_items", on_delete=models.CASCADE
+    )
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    quantity = models.PositiveIntegerField(default=1)
+
+    def __str__(self):
+        """
+        Method to return a string representation of the OrderItem object.
+        The string representation includes the product name and the quantity.
+        """
+        # return str(self.id)
+        return f"{self.product.name} x {self.quantity}"
+
+    def get_cost(self):
+        """
+        Method to calculate the cost of the order item.
+        The cost is calculated by multiplying the price of the product by the quantity.
+        """
+        return self.price * self.quantity
