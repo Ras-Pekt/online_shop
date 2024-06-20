@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import OrderItem
 from .forms import CreateOrderForm
 from cart.cart import Cart
+from django.contrib import messages
 
 
 def create_order(request):

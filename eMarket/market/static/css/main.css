@@ -40,9 +40,6 @@ a.button.light {
 	background: #ededed;
 }
 
-.text-left {
-	text-align: left;
-}
 
 .text-right {
 	text-align: right;
@@ -263,69 +260,6 @@ ul.errorlist {
 	float: right;
 }
 
-.neg {
-	color: #dc1616;
-}
-
-.languages {
-	float: right;
-	padding-top: 4px;
-	font-size: 14px;
-}
-
-.languages ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	float: left;
-}
-
-.languages ul li {
-	float: left;
-	margin: 0 0 0 10px;
-	font-size: 14px;
-}
-
-.languages p {
-	float: left;
-	margin: 0;
-}
-
-.recommendations {
-	clear: both;
-}
-
-.recommendations div {
-	float: left;
-}
-
-.recommendations img {
-	width: 200px
-}
-
-.recommendations p {
-	clear: both;
-}
-
-.recommendations.cart {
-	width: 60%;
-	float: left;
-	overflow: auto;
-}
-
-.recommendations.cart h3 {
-	margin-top: 0;
-}
-
-.recommendations.cart .item {
-	margin-right: 10px;
-}
-
-.recommendations.cart img {
-	width: 120px;
-}
-
-/* braintree hosted fields */
 form div.field {
 	font-size: 13px;
 	color: #666;

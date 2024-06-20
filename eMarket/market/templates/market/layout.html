@@ -1,20 +1,35 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<title>{% block title %}eMarket{% endblock %}</title>
-		<link href="{% static 'css/main.css' %}" rel="stylesheet">
-	</head>
-	<body>
-		<div id="header">
-			<a href="{% url 'market:product_list' %}" class="logo">eMarket</a>
+
+<head>
+	<meta charset="utf-8" />
+	<title>{% block title %}eMarket{% endblock %}</title>
+	<link href="{% static 'css/main.css' %}" rel="stylesheet" />
+</head>
+
+<body>
+	<div id="header">
+		<a href="{% url 'market:product_list' %}" class="logo">eMarket</a>
+	</div>
+	<div id="subheader">
+		<div class="cart">
+			<a href="{% url 'cart:cart_detail' %}">View Cart</a>
 		</div>
-		<div id="subheader">
-			<div class="cart">
-				<a href="{% url 'cart:cart_detail' %}">View Cart</a>
-			</div>
-		</div>
-		<div id="content">{% block content %} {% endblock %}</div>
-	</body>
+	</div>
+
+	<div id="content">
+		{% if messages %}
+		<ul class="messages">
+			{% for message in messages %}
+			<li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+				{{ message }}
+			</li>
+			{% endfor %}
+		</ul>
+		{% endif %} {% block content %} {% endblock %}
+	</div>
+</body>
+
 </html>

@@ -6,9 +6,9 @@ Your shopping cart
 {% endblock %}
 
 {% block content %}
-<h1>Your shopping cart</h1>
 
 {% if cart %}
+<h1>Your shopping cart</h1>
 
 <table class="cart">
 	<thead>
@@ -27,7 +27,7 @@ Your shopping cart
 		<tr>
 			<td>
 				<a href="{{ product.get_absolute_url }}">
-					<img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
+					<img src="{{ product.image.url }}">
 				</a>
 			</td>
 			<td>{{ product.name }}</td>
@@ -58,11 +58,12 @@ Your shopping cart
 	</tbody>
 </table>
 
-<p class="text-right"><a href="#" class="button">Checkout</a></p>
-
+<p class="text-right"><a href="{% url 'orders:create_order' %}" class="button">Checkout</a></p>
+{% else %}
+<h1>Your shopping cart is empty</h1>
 {% endif %}
-
 <p>
 	<a href="{% url 'market:product_list' %}" class="button">Continue shopping</a>
 </p>
+
 {% endblock %}

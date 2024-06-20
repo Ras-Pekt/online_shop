@@ -23,7 +23,6 @@ class Cart:
         self.cart = cart
 
     def add(self, product, quantity=1, update_quantity=False):
-        # def add(self, product, quantity=1):
         """Add a product to the cart or update its quantity.
 
         Args:
@@ -44,17 +43,11 @@ class Cart:
         else:
             self.cart[product_id]["quantity"] += quantity
 
-        # if product_id not in self.cart:
-        #     self.cart[product_id] = {"quantity": quantity, "price": str(product.price)}
-        # else:
-        #     self.cart[product_id]["quantity"] += quantity
-
         self.save()
 
     def save(self):
         """Save the cart."""
 
-        self.session[settings.CART_SESSION_ID] = self.cart
         self.session.modified = True
 
     def remove(self, product):

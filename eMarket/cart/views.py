@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 from market.models import Product
@@ -28,9 +29,9 @@ def cart_add(request, product_id):
             update_quantity=cleaned_data["update_quantity"],
         )
 
-    # TODO: Add add a seperate view for the view_cart_details.
+    # messages.success(request, f"Added {product.name} to your cart.")
 
-    return redirect("market:product_list")
+    return redirect("cart:cart_detail")
 
 
 @require_POST

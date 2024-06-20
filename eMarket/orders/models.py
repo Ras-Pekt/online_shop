@@ -80,8 +80,8 @@ class OrderItem(models.Model):
         Method to return a string representation of the OrderItem object.
         The string representation includes the product name and the quantity.
         """
-        # return str(self.id)
-        return f"{self.product.name} x {self.quantity}"
+        return str(self.id)
+        # return f"{self.product.name} x {self.quantity}"
 
     def get_cost(self):
         """
